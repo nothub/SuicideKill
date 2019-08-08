@@ -1,0 +1,5 @@
+name: SuicideKill
+version: @version@
+description: /kill suicide at insufficient permissions
+authors: [blockparole]
+main: not.hub.suicidekill.SuicideKill
