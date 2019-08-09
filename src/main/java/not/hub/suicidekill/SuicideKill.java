@@ -8,7 +8,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 
 public final class SuicideKill extends JavaPlugin implements Listener {
 
@@ -27,7 +26,7 @@ public final class SuicideKill extends JavaPlugin implements Listener {
         if (unvanishDelay == 0) {
             unvanishDelay = 1;
         }
-        BukkitTask cooldownTask = new CooldownRunnable(this).runTaskTimer(this, 0, cooldownValue);
+        new CooldownRunnable(this).runTaskTimer(this, 0, cooldownValue);
         getServer().getPluginManager().registerEvents(this, this);
     }
 
@@ -74,7 +73,7 @@ public final class SuicideKill extends JavaPlugin implements Listener {
         // TODO - EntityDamageEvent.DamageCause.SUICIDE
 
         // unvanish requester after n ticks
-        BukkitTask unvanishTask = new UnvanishRunnable(this, requester).runTaskLater(this, unvanishDelay);
+        new UnvanishRunnable(this, requester).runTaskLater(this, unvanishDelay);
 
     }
 
