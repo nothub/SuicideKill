@@ -64,6 +64,8 @@ public final class SuicideKill extends JavaPlugin implements Listener {
             cooldown = true;
         }
 
+        getLogger().info("Killing: " + requester.getName());
+
         // tp exploit protection vanish
         vanish(requester);
 
