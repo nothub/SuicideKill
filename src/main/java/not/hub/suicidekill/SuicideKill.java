@@ -2,12 +2,15 @@ package not.hub.suicidekill;
 
 import not.hub.suicidekill.tasks.CooldownRunnable;
 import not.hub.suicidekill.tasks.UnvanishRunnable;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Optional;
 
 public final class SuicideKill extends JavaPlugin implements Listener {
 
