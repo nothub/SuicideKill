@@ -65,6 +65,14 @@ public final class SuicideKill extends JavaPlugin implements Listener {
 
         getLogger().info("Killing: " + requester.getName());
 
+        // dismount
+        Optional<Entity> vehicle = Optional.ofNullable(requester.getVehicle());
+        if (vehicle.isPresent()) {
+            getLogger().info("Dismounting " + requester.getDisplayName() + " from " + vehicle.get().getName() + " before killing");
+            vehicle.get().eject();
+        }
+
+        
         // tp exploit protection vanish
         vanish(requester);
 
