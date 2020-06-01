@@ -7,6 +7,6 @@ For Players with correct permissions, the command works as intended: `kill <targ
 
 Uses [vanish](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html#hidePlayer-org.bukkit.plugin.Plugin-org.bukkit.entity.Player-) to mitigate [Coordinate Exploitation](https://2b2t.miraheze.org/wiki/Coordinate_Exploits#Debug_Exploit/).
 
-This Project uses [PaperLib](https://github.com/PaperMC/PaperLib) and was tested on [Paper](https://papermc.io/) [1.12.2](https://papermc.io/api/v1/paper/1.12.2/1618).
+This Project was tested on [Paper](https://papermc.io/) [1.12.2](https://papermc.io/api/v1/paper/1.12.2/1618).
 
 Inspired by: [OldschoolKill](https://www.spigotmc.org/resources/oldschoolkill.4047/)
