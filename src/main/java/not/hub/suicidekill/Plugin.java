@@ -132,7 +132,7 @@ public final class Plugin extends JavaPlugin implements Listener {
         getConfig().addDefault("unvanish-ticks", 10);
         getConfig().options().copyDefaults(true);
 
-        if (getConfig().getInt("unvanish-ticks") <= 10) {
+        if (getConfig().getInt("unvanish-ticks") < 10) {
             getConfig().set("unvanish-ticks", 10);
         }
 
