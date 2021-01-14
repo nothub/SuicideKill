@@ -1,11 +1,14 @@
-# Java
-*.class
-*.jar
-hs_err_pid*
+*
+!*/
 
-# Maven
-target/
+!/.gitignore
+!/.gitmodules
+!/.neckbeard
+!/LICENSE
+!/pom.xml
+!/README.md
 
-# IntelliJ
-.idea
-*.iml
+!/.github/**
+!/.run/**
+!/convenience/**
+!/src/**
