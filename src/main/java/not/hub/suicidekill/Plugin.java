@@ -14,22 +14,12 @@ import java.util.Optional;
 
 public final class SuicideKill extends JavaPlugin implements Listener {
 
-    private String cooldownMessage;
-    private int cooldownValue;
-    private int unvanishDelay;
-
     private boolean cooldown;
 
     @Override
     public void onEnable() {
-        loadConfig();
-        cooldownMessage = getConfig().getString("global-cooldown-message");
-        cooldownValue = getConfig().getInt("global-cooldown-ticks");
-        unvanishDelay = getConfig().getInt("unvanish-delay-ticks");
-        if (unvanishDelay == 0) {
-            unvanishDelay = 1;
-        }
-        new CooldownRunnable(this).runTaskTimer(this, 0, cooldownValue);
+        config();
+        new CooldownRunnable(this).runTaskTimer(this, 0, getConfig().getInt("cooldown-ticks"));
         getServer().getPluginManager().registerEvents(this, this);
     }
 
@@ -75,7 +65,7 @@ public final class SuicideKill extends JavaPlugin implements Listener {
             vehicle.get().eject();
         }
 
-        
+
         // tp exploit protection vanish
         vanish(requester);
 
@@ -84,7 +74,7 @@ public final class SuicideKill extends JavaPlugin implements Listener {
         // TODO - EntityDamageEvent.DamageCause.SUICIDE
 
         // unvanish requester after n ticks
-        new UnvanishRunnable(this, requester).runTaskLater(this, unvanishDelay);
+        new UnvanishRunnable(this, requester).runTaskLater(this, getConfig().getInt("unvanish-ticks"));
 
     }
 
@@ -109,15 +99,26 @@ public final class SuicideKill extends JavaPlugin implements Listener {
     }
 
     private void cooldownMessage(Player player) {
-        player.sendMessage(cooldownMessage);
+        player.sendMessage(getConfig().getString("cooldown-message"));
     }
 
-    private void loadConfig() {
-        getConfig().addDefault("global-cooldown-message", "Sorry, Death is busy at the moment. Please try again later...");
-        getConfig().addDefault("global-cooldown-ticks", 60);
-        getConfig().addDefault("unvanish-delay-ticks", 20);
+    private void config() {
+
+        getConfig().addDefault("cooldown-message", "Sorry, Death is busy at the moment. Please try again later...");
+        getConfig().addDefault("cooldown-ticks", 40);
+        getConfig().addDefault("unvanish-ticks", 20);
         getConfig().options().copyDefaults(true);
+
+        if (getConfig().getInt("unvanish-ticks") <= 20) {
+            getConfig().set("unvanish-ticks", 20);
+        }
+
+        if (getConfig().getInt("cooldown-ticks") <= getConfig().getInt("unvanish-ticks")) {
+            getConfig().set("cooldown-ticks", getConfig().getInt("unvanish-ticks") + 1);
+        }
+
         saveConfig();
+
     }
 
 }
