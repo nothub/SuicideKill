@@ -1,5 +1,5 @@
 name: ${project.artifactId}
 version: ${project.version}
 description: Adds back old /kill suicide mechanic for players without the minecraft.command.kill permission.
-authors: [ blockparole ]
+authors: [ nothub ]
 main: not.hub.suicidekill.Plugin
