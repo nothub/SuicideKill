@@ -1,7 +1,7 @@
 # SuicideKill
-[![Download](https://img.shields.io/github/downloads/blockparole/SuicideKill/latest/total.svg?label=download%20latest&style=popout-square)](https://github.com/blockparole/SuicideKill/releases/latest)
-[![RepoSize](https://img.shields.io/github/languages/code-size/blockparole/SuicideKill.svg?label=repo%20size&style=popout-square)](https://github.com/blockparole/SuicideKill)
-[![HitCount](http://hits.dwyl.com/blockparole/SuicideKill.svg)](https://github.com/blockparole/SuicideKill)
+[![Download](https://img.shields.io/github/downloads/nothub/SuicideKill/latest/total.svg?label=download%20latest&style=popout-square)](https://github.com/nothub/SuicideKill/releases/latest)
+[![RepoSize](https://img.shields.io/github/languages/code-size/nothub/SuicideKill.svg?label=repo%20size&style=popout-square)](https://github.com/nothub/SuicideKill)
+[![HitCount](http://hits.dwyl.com/nothub/SuicideKill.svg)](https://github.com/nothub/SuicideKill)
 
 A simple Plugin that kills Players with insufficient permissions when they run: `/kill`  
 For Players with correct permissions, the command works as intended: `kill <target>`.
