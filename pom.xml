@@ -39,8 +39,8 @@
 
     <repositories>
         <repository>
-            <id>destroystokyo-repo</id>
-            <url>https://repo.destroystokyo.com/repository/maven-public/</url>
+            <id>neckbeard</id>
+            <url>https://maven.neckbeard.cc/</url>
         </repository>
         <repository>
             <id>sonatype</id>
