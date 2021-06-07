@@ -6,7 +6,7 @@
 
   <groupId>not.hub</groupId>
   <artifactId>SuicideKill</artifactId>
-  <version>1.3</version>
+  <version>1.3.0</version>
   <packaging>jar</packaging>
 
   <name>SuicideKill</name>
