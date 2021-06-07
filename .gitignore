@@ -1,14 +1,22 @@
+# ignore all files
 *
+# but include directories
 !*/
 
+# git
+!/**/.gitkeep
 !/.gitignore
 !/.gitmodules
-!/.neckbeard
-!/LICENSE
-!/pom.xml
-!/README.md
 
+# java
+!/**/src/**
+
+# maven
+!/**/pom.xml
+
+# misc
 !/.github/**
 !/.run/**
-!/convenience/**
-!/src/**
+!/*.md
+!/.editorconfig
+!/LICENSE
