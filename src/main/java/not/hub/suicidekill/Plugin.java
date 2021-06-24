@@ -1,5 +1,6 @@
 package not.hub.suicidekill;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -24,6 +25,7 @@ public final class Plugin extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        new Metrics(this, 11814);
         config();
         getServer()
                 .getPluginManager()
