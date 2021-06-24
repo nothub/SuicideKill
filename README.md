@@ -11,6 +11,16 @@ Uses [vanish](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.
 
 ---
 
+##### Default Config
+
+```
+cooldown-message: §cSorry, Death is too busy at the moment. Please try again later...§r
+cooldown-ticks: 20
+unvanish-ticks: 10
+```
+
+---
+
 ##### Tested on
 
 Latest [Paper](https://papermc.io/) release for MC 1.12.x, 1.13.x, 1.14.x, 1.15.x, 1.16.x, 1.17.x
