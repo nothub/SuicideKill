@@ -3,3 +3,4 @@ version: ${project.version}
 description: Adds back old /kill suicide mechanic for players without the minecraft.command.kill permission.
 authors: [ nothub ]
 main: not.hub.suicidekill.Plugin
+api-version: 1.13

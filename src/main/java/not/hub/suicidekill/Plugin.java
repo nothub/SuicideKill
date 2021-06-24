@@ -1,5 +1,6 @@
 package not.hub.suicidekill;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -12,6 +13,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -19,31 +21,32 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public final class Plugin extends JavaPlugin implements Listener {
 
+    public static final String COOLDOWN_MESSAGE_DEFAULT = ChatColor.RED + "Sorry, Death is too busy at the moment. Please try again later..." + ChatColor.RESET;
     private final Set<UUID> cooldowns = ConcurrentHashMap.newKeySet();
     private final Set<UUID> vanished = ConcurrentHashMap.newKeySet();
 
     @Override
     public void onEnable() {
+        new Metrics(this, 11813);
         config();
         getServer()
-                .getPluginManager()
-                .registerEvents(this, this);
+            .getPluginManager()
+            .registerEvents(this, this);
     }
 
     @Override
     public void onDisable() {
         vanished
-                .stream()
-                .map(uuid -> getServer().getPlayer(uuid))
-                .forEach(this::unvanish);
+            .stream()
+            .map(uuid -> getServer().getPlayer(uuid))
+            .filter(Objects::nonNull)
+            .forEach(this::unvanish);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
 
         if (!event.getMessage().equalsIgnoreCase("/kill")) return;
-
-        if (event.getPlayer() == null) return;
 
         final Player player = event.getPlayer();
 
@@ -55,7 +58,7 @@ public final class Plugin extends JavaPlugin implements Listener {
 
         // no kill while cooldown active
         if (cooldowns.contains(player.getUniqueId())) {
-            player.sendMessage(getConfig().getString("cooldown-message"));
+            player.sendMessage(getConfig().getString("cooldown-message", COOLDOWN_MESSAGE_DEFAULT));
             return;
         } else {
             cooldowns.add(player.getUniqueId());
@@ -65,8 +68,8 @@ public final class Plugin extends JavaPlugin implements Listener {
 
         // dismount
         Optional
-                .ofNullable(player.getVehicle())
-                .ifPresent(Entity::eject);
+            .ofNullable(player.getVehicle())
+            .ifPresent(Entity::eject);
 
         // coordinate exploit protection vanish
         vanish(player);
@@ -110,24 +113,24 @@ public final class Plugin extends JavaPlugin implements Listener {
     private void vanish(Player player) {
         vanished.add(player.getUniqueId());
         getServer()
-                .getOnlinePlayers()
-                .stream()
-                .filter(p -> !p.getUniqueId().equals(player.getUniqueId()))
-                .forEach(p -> p.hidePlayer(this, player));
+            .getOnlinePlayers()
+            .stream()
+            .filter(p -> !p.getUniqueId().equals(player.getUniqueId()))
+            .forEach(p -> p.hidePlayer(this, player));
     }
 
     public void unvanish(Player player) {
         getServer()
-                .getOnlinePlayers()
-                .stream()
-                .filter(p -> !p.getUniqueId().equals(player.getUniqueId()))
-                .forEach(p -> p.showPlayer(this, player));
+            .getOnlinePlayers()
+            .stream()
+            .filter(p -> !p.getUniqueId().equals(player.getUniqueId()))
+            .forEach(p -> p.showPlayer(this, player));
         vanished.remove(player.getUniqueId());
     }
 
     private void config() {
 
-        getConfig().addDefault("cooldown-message", ChatColor.RED + "Sorry, Death is too busy at the moment. Please try again later..." + ChatColor.RESET);
+        getConfig().addDefault("cooldown-message", COOLDOWN_MESSAGE_DEFAULT);
         getConfig().addDefault("cooldown-ticks", 20);
         getConfig().addDefault("unvanish-ticks", 10);
         getConfig().options().copyDefaults(true);
