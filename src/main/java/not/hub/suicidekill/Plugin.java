@@ -25,7 +25,7 @@ public final class Plugin extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        new Metrics(this, 11814);
+        new Metrics(this, 11813);
         config();
         getServer()
                 .getPluginManager()
