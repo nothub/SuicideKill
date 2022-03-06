@@ -58,7 +58,8 @@ public final class Plugin extends JavaPlugin implements Listener {
 
         // no kill while cooldown active
         if (cooldowns.contains(player.getUniqueId())) {
-            player.sendMessage(getConfig().getString("cooldown-message", COOLDOWN_MESSAGE_DEFAULT));
+            String message = getConfig().getString("cooldown-message");
+            player.sendMessage(message != null ? message : COOLDOWN_MESSAGE_DEFAULT);
             return;
         } else {
             cooldowns.add(player.getUniqueId());
